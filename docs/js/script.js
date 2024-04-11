@@ -67,7 +67,7 @@ function nightMode(date) {
 		buttonSearchSity.classList.add('nightmode')
 		footer.classList.add('nightmode')
 		forecast.classList.add('nightmode')
-		locationIcon.setAttribute('src', '../img/location-dark.svg')
+		locationIcon.setAttribute('src', './img/location-dark.svg')
 		return nightModes
 	} else {
 		nightModes = false;
@@ -78,7 +78,7 @@ function nightMode(date) {
 		buttonSearchSity.classList.remove('nightmode')
 		footer.classList.remove('nightmode')
 		forecast.classList.remove('nightmode')
-		locationIcon.setAttribute('src', '../img/location-light.svg')
+		locationIcon.setAttribute('src', './img/location-light.svg')
 		return nightModes
 	}
 }
@@ -108,399 +108,399 @@ function mainIcon(code, iconForecast) {
 		if (nightModes) {
 			switch (code) {
 				case 1000:
-					weatherIcon.setAttribute('src', '../img/icons/skc_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/skc_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/skc_n.svg')
+					iconForecast.setAttribute('src', './img/icons/skc_n.svg')
 					break;
 				case 1003:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_n.svg')
 					break;
 				case 1006:
-					weatherIcon.setAttribute('src', '../img/icons/ovc(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc(1).svg')
 					break;
 				case 1009:
-					weatherIcon.setAttribute('src', '../img/icons/ovc(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc(1).svg')
 					break;
 				case 1030:
-					weatherIcon.setAttribute('src', '../img/icons/fg_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
 					break;
 				case 1063:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1066:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
 					break;
 				case 1069:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
 					break;
 				case 1072:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
 					break;
 				case 1087:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts(1).svg')
 					break;
 				case 1114:
-					weatherIcon.setAttribute('src', '../img/icons/-bl(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/-bl(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/-bl(1).svg')
+					iconForecast.setAttribute('src', './img/icons/-bl(1).svg')
 					break;
 				case 1117:
-					weatherIcon.setAttribute('src', '../img/icons/bl(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/bl(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/bl(1).svg')
+					iconForecast.setAttribute('src', './img/icons/bl(1).svg')
 					break;
 				case 1135:
-					weatherIcon.setAttribute('src', '../img/icons/fg_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
 					break;
 				case 1147:
-					weatherIcon.setAttribute('src', '../img/icons/fg_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
 					break;
 				case 1150:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1153:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1168:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
 					break;
 				case 1171:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
 					break;
 				case 1180:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1183:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1186:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1189:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
 					break;
 				case 1192:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
 					break;
 				case 1195:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
 					break;
 				case 1198:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1201:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
 					break;
 				case 1204:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
 					break;
 				case 1207:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+sn_n.svg')
 					break;
 				case 1210:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_-sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_-sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_-sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_-sn(1).svg')
 					break;
 				case 1213:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
 					break;
 				case 1216:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_sn(1).svg')
 					break;
 				case 1219:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_sn_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_sn_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_sn_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_sn_n.svg')
 					break;
 				case 1222:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
 					break;
 				case 1225:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
 					break;
 				case 1237:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
 					break;
 				case 1240:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
 					break;
 				case 1243:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
 					break;
 				case 1246:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
 					break;
 				case 1249:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
 					break;
 				case 1252:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
 					break;
 				case 1255:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
 					break;
 				case 1258:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
 					break;
 				case 1261:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
 					break;
 				case 1264:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
 					break;
 				case 1273:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts(1).svg')
 					break;
 				case 1276:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ra(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ra(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ra(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ra(1).svg')
 					break;
 				case 1279:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ha(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ha(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
 					break;
 				case 1282:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ha(1).svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ha(1).svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
 					break;
 				default:
-					weatherIcon.setAttribute('src', '../img/icons/skc_n.svg')
-					iconForecast.setAttribute('src', '../img/icons/skc_n.svg')
+					weatherIcon.setAttribute('src', './img/icons/skc_n.svg')
+					iconForecast.setAttribute('src', './img/icons/skc_n.svg')
 					break;
 			}
 		} else {
 			switch (code) {
 				case 1000:
-					weatherIcon.setAttribute('src', '../img/icons/skc_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/skc_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/skc_d.svg')
+					iconForecast.setAttribute('src', './img/icons/skc_d.svg')
 					break;
 				case 1003:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_d.svg')
 					break;
 				case 1006:
-					weatherIcon.setAttribute('src', '../img/icons/ovc.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc.svg')
 					break;
 				case 1009:
-					weatherIcon.setAttribute('src', '../img/icons/ovc.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc.svg')
 					break;
 				case 1030:
-					weatherIcon.setAttribute('src', '../img/icons/fg_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
 					break;
 				case 1063:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1066:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
 					break;
 				case 1069:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
 					break;
 				case 1072:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
 					break;
 				case 1087:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts.svg')
 					break;
 				case 1114:
-					weatherIcon.setAttribute('src', '../img/icons/-bl.svg')
-					iconForecast.setAttribute('src', '../img/icons/-bl.svg')
+					weatherIcon.setAttribute('src', './img/icons/-bl.svg')
+					iconForecast.setAttribute('src', './img/icons/-bl.svg')
 					break;
 				case 1117:
-					weatherIcon.setAttribute('src', '../img/icons/bl.svg')
-					iconForecast.setAttribute('src', '../img/icons/bl.svg')
+					weatherIcon.setAttribute('src', './img/icons/bl.svg')
+					iconForecast.setAttribute('src', './img/icons/bl.svg')
 					break;
 				case 1135:
-					weatherIcon.setAttribute('src', '../img/icons/fg_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
 					break;
 				case 1147:
-					weatherIcon.setAttribute('src', '../img/icons/fg_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/fg_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
+					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
 					break;
 				case 1150:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1153:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1168:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
 					break;
 				case 1171:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
 					break;
 				case 1180:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1183:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1186:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1189:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
 					break;
 				case 1192:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
 					break;
 				case 1195:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
 					break;
 				case 1198:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1201:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
 					break;
 				case 1204:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
 					break;
 				case 1207:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+sn_d.svg')
 					break;
 				case 1210:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_-sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_-sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_-sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_-sn.svg')
 					break;
 				case 1213:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
 					break;
 				case 1216:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_sn.svg')
 					break;
 				case 1219:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_sn_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_sn_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_sn_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_sn_d.svg')
 					break;
 				case 1222:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
 					break;
 				case 1225:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
 					break;
 				case 1237:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
 					break;
 				case 1240:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
 					break;
 				case 1243:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_+ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
 					break;
 				case 1246:
-					weatherIcon.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/bkn_-ra_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
+					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
 					break;
 				case 1249:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
 					break;
 				case 1252:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
 					break;
 				case 1255:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ra_sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
 					break;
 				case 1258:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_+sn.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_+sn.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
 					break;
 				case 1261:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
 					break;
 				case 1264:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ha.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ha.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
 					break;
 				case 1273:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts.svg')
 					break;
 				case 1276:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ra.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ra.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ra.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ra.svg')
 					break;
 				case 1279:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ha.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ha.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha.svg')
 					break;
 				case 1282:
-					weatherIcon.setAttribute('src', '../img/icons/ovc_ts_ha.svg')
-					iconForecast.setAttribute('src', '../img/icons/ovc_ts_ha.svg')
+					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha.svg')
+					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha.svg')
 					break;
 				default:
-					weatherIcon.setAttribute('src', '../img/icons/skc_d.svg')
-					iconForecast.setAttribute('src', '../img/icons/skc_d.svg')
+					weatherIcon.setAttribute('src', './img/icons/skc_d.svg')
+					iconForecast.setAttribute('src', './img/icons/skc_d.svg')
 					break;
 			}
 		}
