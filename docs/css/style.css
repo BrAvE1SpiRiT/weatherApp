@@ -1,6 +1,6 @@
 .body {
 	font-family: "Poppins", sans-serif;
-	background-image: url("../../img/fullpage-bg.png");
+	background-image: url("../img/fullpage-bg.png");
 	background-position: center;
 	background-repeat: repeat;
 	background-color: #4370c7;
@@ -22,7 +22,7 @@
 }
 
 .weather-app {
-	background-image: url("../../img/background-day.png");
+	background-image: url("../img/background-day.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -32,7 +32,7 @@
 }
 
 .weather-app.nightmode {
-	background-image: url("../../img/background-night.png");
+	background-image: url("../img/background-night.png");
 	background-color: #0f1d3c;
 }
 
