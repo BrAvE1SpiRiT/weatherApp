@@ -508,7 +508,7 @@ function mainIcon(code, iconForecast) {
 }
 
 function displayWeather(lat, lon) {
-	fetch(`http://api.weatherapi.com/v1/current.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru`)
+	fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru`)
 		.then(response => response.json())
 		.then(json => {
 			cityName.textContent = json.location.name
@@ -552,7 +552,7 @@ function getPosition(position) {
 }
 
 function todayForecast(lat, lon) {
-	fetch(`http://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=1`)
+	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=1`)
 		.then(response => response.json())
 		.then(json => {
 			let hours = json.forecast.forecastday[0].hour
@@ -588,7 +588,7 @@ function todayForecast(lat, lon) {
 		})
 }
 function weekForecast(lat, lon) {
-	fetch(`http://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=7`)
+	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=7`)
 		.then(response => response.json())
 		.then(json => {
 			const daysWeek = [
@@ -633,7 +633,7 @@ function weekForecast(lat, lon) {
 		})
 }
 function fourteenDaysForecast(lat, lon) {
-	fetch(`http://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=14`)
+	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=14`)
 		.then(response => response.json())
 		.then(json => {
 			const daysWeek = [
