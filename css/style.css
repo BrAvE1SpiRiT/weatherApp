@@ -1,6 +1,6 @@
 .body {
 	font-family: "Poppins", sans-serif;
-	background-image: url("../../img/fullpage-bg.png");
+	background-image: url("../img/fullpage-bg.png");
 	background-position: center;
 	background-repeat: repeat;
 	background-color: #4370c7;
@@ -16,13 +16,7 @@
 }
 
 .container {
-
-	max-width: 1024px;
-
-}
-
-.weather-app {
-	background-image: url("../../img/background-day.png");
+	background-image: url("../img/background-day.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -31,8 +25,9 @@
 	border-radius: 32px;
 }
 
-.weather-app.nightmode {
-	background-image: url("../../img/background-night.png");
+
+.container.nightmode {
+	background-image: url("../img/background-night.png");
 	background-color: #0f1d3c;
 }
 
@@ -323,4 +318,130 @@
 	font-size: 16px;
 	font-weight: 500;
 	color: white;
+}
+
+
+@media (max-width: 1150px) {
+	.container {
+		display: flex;
+		align-items: start;
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+	}
+
+	.weather-app {
+		width: 100%;
+	}
+
+	.footer {
+		width: 100%;
+	}
+
+	.header__sity {
+		font-size: 35px;
+	}
+
+	.header__data {
+		font-size: 19px;
+	}
+
+	.header-form__sity,
+	.header-form__button {
+		padding: 10px 20px;
+	}
+
+	.header__location-btn {
+		padding: 10px;
+	}
+}
+
+@media (max-width: 780px) {
+	.header {
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+
+	.header__info {
+		margin-top: 20px;
+	}
+
+	.header__sity {
+		font-size: 30px;
+		text-align: center;
+	}
+
+	.header__data {
+		font-size: 18px;
+	}
+
+	.header-form__sity,
+	.header-form__button {
+		padding: 8px 16px;
+	}
+
+	.header__location-btn {
+		padding: 8px;
+	}
+
+	.main {
+		flex-direction: column;
+		margin-top: 20px;
+	}
+
+	.footer__list {
+		justify-content: center;
+	}
+}
+
+@media (max-width: 470px) {
+	.container {
+
+		padding: 10px;
+	}
+
+	.header__sity {
+		margin-bottom: 0;
+	}
+
+	.header-form__sity {
+		width: 200px;
+		font-size: 12px;
+	}
+
+	.header-form__button {
+		font-size: 12px;
+	}
+
+	.header__location-btn {
+		padding: 5px;
+	}
+
+	.main__units {
+		font-size: 16px;
+	}
+
+	.main__description {
+		font-size: 14px;
+	}
+
+	.main__right {
+		margin-top: 20px;
+	}
+
+	.main__icon {
+		margin-right: 4px;
+	}
+
+	.main__weather-icon {
+		width: 72px;
+	}
+
+	.footer {
+		margin-top: 20px;
+	}
+
+	.footer__link {
+		font-size: 12px;
+	}
 }
