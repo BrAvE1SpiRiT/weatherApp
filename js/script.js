@@ -589,8 +589,7 @@ function displayWeather(lat, lon) {
 
 			nightMode(json.location.localtime);
 			mainIcon(json.current.condition.code, null);
-			todayForecast(lat, lon);
-			console.log(json.current.wind_dir);
+			todayForecast(lat, lon, json.location.localtime);
 			windDirectionFunction(json.current.wind_dir)
 		})
 }
@@ -609,11 +608,19 @@ function getPosition(position) {
 	fourteenDays.classList.remove('active')
 }
 
-function todayForecast(lat, lon) {
+
+function todayForecast(lat, lon, time) {
 	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=1`)
 		.then(response => response.json())
 		.then(json => {
 			let hours = json.forecast.forecastday[0].hour
+			const currentTime = new Date(time);
+			const currentHour = currentTime.getHours();
+
+			const forecastList = document.querySelector('.footer__list-forecast');
+
+			let scrollOffset = 0;
+
 			for (let i = 0; i < hours.length; i++) {
 				let itemForecast = document.createElement('li')
 				let titleForecast = document.createElement('h2')
@@ -631,17 +638,25 @@ function todayForecast(lat, lon) {
 				minTempForecast.classList.add('min-temp')
 				maxTempForecast.classList.add('max-temp')
 
-				listForecast.append(itemForecast)
+				forecastList.append(itemForecast)
 				itemForecast.append(titleForecast)
 				itemForecast.append(iconForecast)
 				itemForecast.append(tempForecast)
 				itemForecast.append(descriptionForecast)
+
 				let currentDate = new Date(hours[i].time)
 				titleForecast.textContent = `${currentDate.getHours().toString().length > 1 ? currentDate.getHours() : '0' + currentDate.getHours()} : 00`
 				mainIcon(hours[i].condition.code, iconForecast)
 				tempForecast.textContent = `${Math.round(hours[i].temp_c)} °C`
 				descriptionForecast.textContent = hours[i].condition.text
+
+
+				if (currentHour === currentDate.getHours()) {
+					scrollOffset = i * (forecastList.firstElementChild.offsetWidth + parseInt(getComputedStyle(forecastList.firstElementChild).marginRight));
+
+				}
 			}
+			forecastList.scrollLeft = scrollOffset;
 			displayForecast(lat, lon)
 		})
 }
