@@ -22,6 +22,7 @@ let feelsLike = document.getElementById('feels-like');
 let humidityLevel = document.getElementById('humidity-level');
 let windSpeed = document.getElementById('wind-speed');
 let listForecast = document.querySelector('.footer__list-forecast');
+let windDirection = document.querySelector('.wind-direction');
 
 
 let nightModes;
@@ -54,6 +55,59 @@ function dateConvert(date) {
 		'Декабря'
 	];
 	return `${daysWeek[currentDate.getDay()]}, ${currentDate.getDate()} ${daysMonth[currentDate.getMonth()]} ${currentDate.getFullYear()} | ${currentDate.getHours().toString().length > 1 ? currentDate.getHours() : '0' + currentDate.getHours()} : ${currentDate.getMinutes().toString().length > 1 ? currentDate.getMinutes() : '0' + currentDate.getMinutes()}`;
+}
+function windDirectionFunction(wind) {
+	switch (wind) {
+		case "N":
+			windDirection.style.transform = "rotate(20deg)"
+			break
+		case "NNE":
+			windDirection.style.transform = "rotate(42.5deg)"
+			break
+		case "NE":
+			windDirection.style.transform = "rotate(65deg)"
+			break
+		case "ENE":
+			windDirection.style.transform = "rotate(87.5deg)"
+			break
+		case "E":
+			windDirection.style.transform = "rotate(110deg)"
+			break
+		case "ESE":
+			windDirection.style.transform = "rotate(132.5deg)"
+			break
+		case "SE":
+			windDirection.style.transform = "rotate(155deg)"
+			break
+		case "SSE":
+			windDirection.style.transform = "rotate(177.5deg)"
+			break
+		case "S":
+			windDirection.style.transform = "rotate(200deg)"
+			break
+		case "SSW":
+			windDirection.style.transform = "rotate(222.5deg)"
+			break
+		case "SW":
+			windDirection.style.transform = "rotate(245deg)"
+			break
+		case "WSW":
+			windDirection.style.transform = "rotate(267.5deg)"
+			break
+		case "W":
+			windDirection.style.transform = "rotate(290deg)"
+			break
+		case "WNW":
+			windDirection.style.transform = "rotate(312.5deg)"
+			break
+		case "NW":
+			windDirection.style.transform = "rotate(335deg)"
+			break
+		case "NNW":
+			windDirection.style.transform = "rotate(357.5deg)"
+			break
+	}
+
 }
 function nightMode(date) {
 	const currentDate = new Date(date)
@@ -511,6 +565,8 @@ function displayWeather(lat, lon) {
 	fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru`)
 		.then(response => response.json())
 		.then(json => {
+			console.log(json);
+
 			cityName.textContent = json.location.name
 			dateHour.textContent = dateConvert(json.location.localtime);
 			temperature.textContent = Math.round(json.current.temp_c)
@@ -534,6 +590,8 @@ function displayWeather(lat, lon) {
 			nightMode(json.location.localtime);
 			mainIcon(json.current.condition.code, null);
 			todayForecast(lat, lon);
+			console.log(json.current.wind_dir);
+			windDirectionFunction(json.current.wind_dir)
 		})
 }
 
@@ -625,7 +683,7 @@ function weekForecast(lat, lon) {
 				itemForecast.append(descriptionForecast)
 
 				let currentDate = new Date(days[j].date)
-				titleForecast.textContent = daysWeek[currentDate.getDay()]
+				titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}.${currentDate.getFullYear()}`
 				mainIcon(days[j].day.condition.code, iconForecast)
 				tempForecast.textContent = `от ${Math.round(days[j].day.mintemp_c)} до ${Math.round(days[j].day.maxtemp_c)}°C`
 				descriptionForecast.textContent = days[j].day.condition.text
@@ -670,7 +728,7 @@ function fourteenDaysForecast(lat, lon) {
 				itemForecast.append(descriptionForecast)
 
 				let currentDate = new Date(days[j].date)
-				titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + currentDate.getMonth() : currentDate.getMonth()}.${currentDate.getFullYear()}`
+				titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}.${currentDate.getFullYear()}`
 				mainIcon(days[j].day.condition.code, iconForecast)
 				tempForecast.textContent = `от ${Math.round(days[j].day.mintemp_c)} до ${Math.round(days[j].day.maxtemp_c)}°C`
 				descriptionForecast.textContent = days[j].day.condition.text

@@ -204,6 +204,10 @@
 	line-height: 28px;
 }
 
+.wind-direction {
+	transform: rotate(20deg);
+}
+
 .footer__list {
 	display: flex;
 	gap: 10px;
