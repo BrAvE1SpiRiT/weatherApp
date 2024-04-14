@@ -204,6 +204,12 @@
 	line-height: 28px;
 }
 
+.main__info-list {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+
 .wind-direction {
 	transform: rotate(20deg);
 }

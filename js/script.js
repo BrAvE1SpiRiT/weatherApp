@@ -650,10 +650,8 @@ function todayForecast(lat, lon, time) {
 				tempForecast.textContent = `${Math.round(hours[i].temp_c)} °C`
 				descriptionForecast.textContent = hours[i].condition.text
 
-
 				if (currentHour === currentDate.getHours()) {
 					scrollOffset = i * (forecastList.firstElementChild.offsetWidth + parseInt(getComputedStyle(forecastList.firstElementChild).marginRight));
-
 				}
 			}
 			forecastList.scrollLeft = scrollOffset;
