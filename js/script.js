@@ -1,33 +1,114 @@
 const apiKeyWeather = '8b106b724a27471cb6b154620240704'
 const apiKeyGeolocation = '1f1b9591-3ccb-4212-a4ec-18f11d78b7af'
 
-
-let body = document.querySelector('.body');
-let container = document.querySelector('.container');
-let locationButton = document.getElementById('location-button');
-let locationIcon = document.getElementById('location-icon');
-let inputSity = document.getElementById('city-input');
-let buttonSearchSity = document.getElementById('search-button');
-let forecast = document.getElementById('forecast');
-let footer = document.querySelector('.footer');
-
-let cityName = document.getElementById('city-name');
-let dateHour = document.getElementById('date-hour');
-let temperature = document.getElementById('temperature');
-let celsiusLink = document.getElementById('celsius-link');
-let fahrenheitLink = document.getElementById('fahrenheit-link');
-let weatherDescription = document.getElementById('weather-description');
-let weatherIcon = document.getElementById('weather-icon');
-let feelsLike = document.getElementById('feels-like');
-let humidityLevel = document.getElementById('humidity-level');
-let windSpeed = document.getElementById('wind-speed');
-let listForecast = document.querySelector('.footer__list-forecast');
-let windDirection = document.querySelector('.wind-direction');
-
-
-let nightModes;
+const elements = {
+	body: document.querySelector('.body'),
+	container: document.querySelector('.container'),
+	locationButton: document.getElementById('location-button'),
+	locationIcon: document.getElementById('location-icon'),
+	inputSity: document.getElementById('city-input'),
+	buttonSearchSity: document.getElementById('search-button'),
+	forecast: document.getElementById('forecast'),
+	footer: document.querySelector('.footer'),
+	cityName: document.getElementById('city-name'),
+	dateHour: document.getElementById('date-hour'),
+	temperature: document.getElementById('temperature'),
+	celsiusLink: document.getElementById('celsius-link'),
+	fahrenheitLink: document.getElementById('fahrenheit-link'),
+	weatherDescription: document.getElementById('weather-description'),
+	weatherIcon: document.getElementById('weather-icon'), //
+	feelsLike: document.getElementById('feels-like'),
+	humidityLevel: document.getElementById('humidity-level'),
+	windSpeed: document.getElementById('wind-speed'),
+	listForecast: document.querySelector('.footer__list-forecast'),
+	windDirection: document.querySelector('.wind-direction')
+};
 
 
+function addNightModeClasses(isNight) {
+	const elementsToModify = [
+		elements.body,
+		elements.container,
+		elements.locationButton,
+		elements.inputSity,
+		elements.buttonSearchSity,
+		elements.footer,
+		elements.forecast
+	];
+	const iconSrc = isNight ? './img/location-dark.svg' : './img/location-light.svg';
+	elements.locationIcon.setAttribute('src', iconSrc);
+
+
+	elementsToModify.forEach(element => {
+		element.classList.toggle('nightmode', isNight);
+	});
+}
+
+let weatherIcons = {
+	1000: './img/icons/skc',
+	1003: './img/icons/bkn',
+	1006: './img/icons/ovc',
+	1009: './img/icons/ovc',
+	1030: './img/icons/fg',
+	1063: './img/icons/bkn_-ra',
+	1066: './img/icons/bkn_-sn',
+	1069: './img/icons/bkn_-sn',
+	1072: './img/icons/bkn_ra',
+	1087: './img/icons/ovc_ts',
+	1114: './img/icons/-bl',
+	1117: './img/icons/bl',
+	1135: './img/icons/fg',
+	1147: './img/icons/fg',
+	1150: './img/icons/bkn_-ra',
+	1153: './img/icons/bkn_-ra',
+	1168: './img/icons/bkn_ra',
+	1171: './img/icons/bkn_+ra',
+	1180: './img/icons/bkn_-ra',
+	1183: './img/icons/bkn_-ra',
+	1186: './img/icons/bkn_-ra',
+	1189: './img/icons/bkn_ra',
+	1192: './img/icons/bkn_+ra',
+	1195: './img/icons/bkn_+ra',
+	1198: './img/icons/bkn_-ra',
+	1201: './img/icons/bkn_+ra',
+	1204: './img/icons/bkn_-sn',
+	1207: './img/icons/bkn_+sn',
+	1210: './img/icons/ovc_-sn',
+	1213: './img/icons/bkn_-sn',
+	1216: './img/icons/ovc_sn',
+	1219: './img/icons/bkn_sn',
+	1222: './img/icons/ovc_+sn',
+	1225: './img/icons/ovc_+sn',
+	1237: './img/icons/ovc_ha',
+	1240: './img/icons/bkn_ra',
+	1243: './img/icons/bkn_+ra',
+	1246: './img/icons/bkn_-ra',
+	1249: './img/icons/ovc_ra_sn',
+	1252: './img/icons/ovc_ra_sn',
+	1255: './img/icons/ovc_ra_sn',
+	1258: './img/icons/ovc_+sn',
+	1261: './img/icons/ovc_ha',
+	1264: './img/icons/ovc_ha',
+	1273: './img/icons/ovc_ts',
+	1276: './img/icons/ovc_ts_ra',
+	1279: './img/icons/ovc_ts_ha',
+	1282: './img/icons/ovc_ts_ha'
+};
+function setIconSrc(iconForecast, code, isNight) {
+	// Режим времени суток: "_d" - день, "_n" - ночь
+	const timeMode = isNight ? '_n' : '_d';
+	const imagePath = `${weatherIcons[code]}${timeMode}.svg`;
+	iconForecast.setAttribute('src', imagePath);
+	iconForecast.setAttribute('loading', 'lazy');
+}
+
+function mainIcon(code, iconForecast) {
+	if (iconForecast) {
+		setIconSrc(iconForecast, code);
+	} else {
+		setIconSrc(elements.weatherIcon, code);
+	}
+}
 
 function dateConvert(date) {
 	const currentDate = new Date(date);
@@ -56,859 +137,149 @@ function dateConvert(date) {
 	];
 	return `${daysWeek[currentDate.getDay()]}, ${currentDate.getDate()} ${daysMonth[currentDate.getMonth()]} ${currentDate.getFullYear()} | ${currentDate.getHours().toString().length > 1 ? currentDate.getHours() : '0' + currentDate.getHours()} : ${currentDate.getMinutes().toString().length > 1 ? currentDate.getMinutes() : '0' + currentDate.getMinutes()}`;
 }
-function windDirectionFunction(wind) {
-	switch (wind) {
-		case "N":
-			windDirection.style.transform = "rotate(20deg)"
-			break
-		case "NNE":
-			windDirection.style.transform = "rotate(42.5deg)"
-			break
-		case "NE":
-			windDirection.style.transform = "rotate(65deg)"
-			break
-		case "ENE":
-			windDirection.style.transform = "rotate(87.5deg)"
-			break
-		case "E":
-			windDirection.style.transform = "rotate(110deg)"
-			break
-		case "ESE":
-			windDirection.style.transform = "rotate(132.5deg)"
-			break
-		case "SE":
-			windDirection.style.transform = "rotate(155deg)"
-			break
-		case "SSE":
-			windDirection.style.transform = "rotate(177.5deg)"
-			break
-		case "S":
-			windDirection.style.transform = "rotate(200deg)"
-			break
-		case "SSW":
-			windDirection.style.transform = "rotate(222.5deg)"
-			break
-		case "SW":
-			windDirection.style.transform = "rotate(245deg)"
-			break
-		case "WSW":
-			windDirection.style.transform = "rotate(267.5deg)"
-			break
-		case "W":
-			windDirection.style.transform = "rotate(290deg)"
-			break
-		case "WNW":
-			windDirection.style.transform = "rotate(312.5deg)"
-			break
-		case "NW":
-			windDirection.style.transform = "rotate(335deg)"
-			break
-		case "NNW":
-			windDirection.style.transform = "rotate(357.5deg)"
-			break
-	}
 
-}
-function nightMode(date) {
+
+function toggleNightMode(date) {
 	const currentDate = new Date(date)
-	const hour = currentDate.getHours()
-	if (hour >= 19 || hour < 6) {
-		nightModes = true;
-		body.classList.add('nightmode')
-		container.classList.add('nightmode')
-		locationButton.classList.add('nightmode')
-		inputSity.classList.add('nightmode')
-		buttonSearchSity.classList.add('nightmode')
-		footer.classList.add('nightmode')
-		forecast.classList.add('nightmode')
-		locationIcon.setAttribute('src', './img/location-dark.svg')
-		return nightModes
-	} else {
-		nightModes = false;
-		body.classList.remove('nightmode')
-		container.classList.remove('nightmode')
-		locationButton.classList.remove('nightmode')
-		inputSity.classList.remove('nightmode')
-		buttonSearchSity.classList.remove('nightmode')
-		footer.classList.remove('nightmode')
-		forecast.classList.remove('nightmode')
-		locationIcon.setAttribute('src', './img/location-light.svg')
-		return nightModes
+	const hour = currentDate.getHours();
+	const isNight = hour >= 19 || hour < 6;
+	addNightModeClasses(isNight);
+	return isNight;
+}
+
+async function displayWeather(lat, lon) {
+	try {
+		const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru`);
+		const json = await response.json();
+		elements.cityName.textContent = json.location.name
+		elements.dateHour.textContent = dateConvert(json.location.localtime);
+		elements.temperature.textContent = Math.round(json.current.temp_c)
+		elements.celsiusLink.addEventListener('click', function (event) {
+			event.preventDefault();
+			elements.temperature.textContent = Math.round(json.current.temp_c)
+			elements.celsiusLink.classList.add('active');
+			elements.fahrenheitLink.classList.remove('active');
+		});
+		elements.fahrenheitLink.addEventListener('click', function (event) {
+			event.preventDefault();
+			elements.temperature.textContent = Math.round(json.current.temp_f);
+			elements.fahrenheitLink.classList.add('active');
+			elements.celsiusLink.classList.remove('active');
+		});
+		elements.weatherDescription.textContent = json.current.condition.text;
+		elements.feelsLike.textContent = Math.round(json.current.feelslike_c);
+		elements.humidityLevel.textContent = json.current.humidity;
+		elements.windSpeed.textContent = Math.round(json.current.wind_kph);
+
+		toggleNightMode(json.location.localtime);
+		todayForecast(lat, lon, json.location.localtime);
+		mainIcon(json.current.condition.code, null);
+		updateWindDirection(json.current.wind_dir);
+	} catch (error) {
+		console.error('Ошибка при получении погоды:', error);
 	}
 }
-function geolocation() {
-	buttonSearchSity.addEventListener('click', function (e) {
-		e.preventDefault();
-		let sityName = inputSity.value;
-		fetch(`https://catalog.api.2gis.com/3.0/items/geocode?q=${sityName}&fields=items.point&key=${apiKeyGeolocation}`)
-			.then(response => response.json())
-			.then(json => {
-				return {
-					lat: json.result.items[0].point.lat,
-					lon: json.result.items[0].point.lon,
-				};
-			})
-			.then(coords => {
-				listForecast.innerHTML = '';
-				displayWeather(coords.lat, coords.lon)
-				today.classList.add('active')
-				week.classList.remove('active')
-				fourteenDays.classList.remove('active')
-			});
-	})
+
+function createForecastItem(hourData) {
+	const itemForecast = document.createElement('li');
+	const titleForecast = document.createElement('h2');
+	const iconForecast = document.createElement('img');
+	const tempForecast = document.createElement('div');
+	const descriptionForecast = document.createElement('div');
+
+	itemForecast.classList.add('item-forecast');
+	titleForecast.classList.add('title-forecast');
+	iconForecast.classList.add('icon-forecast');
+	tempForecast.classList.add('temp-forecast');
+	descriptionForecast.classList.add('description-forecast');
+
+	const currentDate = new Date(hourData.time);
+	titleForecast.textContent = `${currentDate.getHours().toString().padStart(2, '0')}:00`;
+	mainIcon(hourData.condition.code, iconForecast);
+	tempForecast.textContent = `${Math.round(hourData.temp_c)} °C`;
+	descriptionForecast.textContent = hourData.condition.text;
+
+	itemForecast.appendChild(titleForecast);
+	itemForecast.appendChild(iconForecast);
+	itemForecast.appendChild(tempForecast);
+	itemForecast.appendChild(descriptionForecast);
+
+	return itemForecast;
 }
-function mainIcon(code, iconForecast) {
-	console.log(iconForecast);
-	if (iconForecast) {
-		if (nightModes) {
-			switch (code) {
-				case 1000:
-					iconForecast.setAttribute('src', './img/icons/skc_n.svg')
-					break;
-				case 1003:
-					iconForecast.setAttribute('src', './img/icons/bkn_n.svg')
-					break;
-				case 1006:
-					iconForecast.setAttribute('src', './img/icons/ovc(1).svg')
-					break;
-				case 1009:
-					iconForecast.setAttribute('src', './img/icons/ovc(1).svg')
-					break;
-				case 1030:
-					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1063:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1066:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1069:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1072:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1087:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts(1).svg')
-					break;
-				case 1114:
-					iconForecast.setAttribute('src', './img/icons/-bl(1).svg')
-					break;
-				case 1117:
-					iconForecast.setAttribute('src', './img/icons/bl(1).svg')
-					break;
-				case 1135:
-					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1147:
-					iconForecast.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1150:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1153:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1168:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1171:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1180:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1183:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1186:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1189:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1192:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1195:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1198:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1201:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1204:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1207:
-					iconForecast.setAttribute('src', './img/icons/bkn_+sn_n.svg')
-					break;
-				case 1210:
-					iconForecast.setAttribute('src', './img/icons/ovc_-sn(1).svg')
-					break;
-				case 1213:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1216:
-					iconForecast.setAttribute('src', './img/icons/ovc_sn(1).svg')
-					break;
-				case 1219:
-					iconForecast.setAttribute('src', './img/icons/bkn_sn_n.svg')
-					break;
-				case 1222:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1225:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1237:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1240:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1243:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1246:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1249:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1252:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1255:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1258:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1261:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1264:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1273:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts(1).svg')
-					break;
-				case 1276:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ra(1).svg')
-					break;
-				case 1279:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
-					break;
-				case 1282:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
-					break;
-				default:
-					iconForecast.setAttribute('src', './img/icons/skc_n.svg')
-					break;
-			}
-		} else {
-			switch (code) {
-				case 1000:
-					iconForecast.setAttribute('src', './img/icons/skc_d.svg')
-					break;
-				case 1003:
-					iconForecast.setAttribute('src', './img/icons/bkn_d.svg')
-					break;
-				case 1006:
-					iconForecast.setAttribute('src', './img/icons/ovc.svg')
-					break;
-				case 1009:
-					iconForecast.setAttribute('src', './img/icons/ovc.svg')
-					break;
-				case 1030:
-					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1063:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1066:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1069:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1072:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1087:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts.svg')
-					break;
-				case 1114:
-					iconForecast.setAttribute('src', './img/icons/-bl.svg')
-					break;
-				case 1117:
-					iconForecast.setAttribute('src', './img/icons/bl.svg')
-					break;
-				case 1135:
-					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1147:
-					iconForecast.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1150:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1153:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1168:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1171:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1180:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1183:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1186:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1189:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1192:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1195:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1198:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1201:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1204:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1207:
-					iconForecast.setAttribute('src', './img/icons/bkn_+sn_d.svg')
-					break;
-				case 1210:
-					iconForecast.setAttribute('src', './img/icons/ovc_-sn.svg')
-					break;
-				case 1213:
-					iconForecast.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1216:
-					iconForecast.setAttribute('src', './img/icons/ovc_sn.svg')
-					break;
-				case 1219:
-					iconForecast.setAttribute('src', './img/icons/bkn_sn_d.svg')
-					break;
-				case 1222:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1225:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1237:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1240:
-					iconForecast.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1243:
-					iconForecast.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1246:
-					iconForecast.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1249:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1252:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1255:
-					iconForecast.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1258:
-					iconForecast.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1261:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1264:
-					iconForecast.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1273:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts.svg')
-					break;
-				case 1276:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ra.svg')
-					break;
-				case 1279:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha.svg')
-					break;
-				case 1282:
-					iconForecast.setAttribute('src', './img/icons/ovc_ts_ha.svg')
-					break;
-				default:
-					iconForecast.setAttribute('src', './img/icons/skc_d.svg')
-					break;
+
+async function todayForecast(lat, lon, time) {
+	try {
+		const response = await fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=1`);
+		const json = await response.json();
+		const hours = json.forecast.forecastday[0].hour;
+		const currentTime = new Date(time);
+		const currentHour = currentTime.getHours();
+		const forecastList = document.querySelector('.footer__list-forecast');
+		let scrollOffset = 0;
+
+		for (let i = 0; i < hours.length; i++) {
+			const itemForecast = createForecastItem(hours[i]);
+			forecastList.appendChild(itemForecast);
+
+			if (currentHour === new Date(hours[i].time).getHours()) {
+				scrollOffset = i * (forecastList.firstElementChild.offsetWidth + parseInt(getComputedStyle(forecastList.firstElementChild).marginRight));
 			}
 		}
-	} else {
-		if (nightModes) {
-			switch (code) {
-				case 1000:
-					weatherIcon.setAttribute('src', './img/icons/skc_n.svg')
-					break;
-				case 1003:
-					weatherIcon.setAttribute('src', './img/icons/bkn_n.svg')
-					break;
-				case 1006:
-					weatherIcon.setAttribute('src', './img/icons/ovc(1).svg')
-					break;
-				case 1009:
-					weatherIcon.setAttribute('src', './img/icons/ovc(1).svg')
-					break;
-				case 1030:
-					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1063:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1066:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1069:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1072:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1087:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts(1).svg')
-					break;
-				case 1114:
-					weatherIcon.setAttribute('src', './img/icons/-bl(1).svg')
-					break;
-				case 1117:
-					weatherIcon.setAttribute('src', './img/icons/bl(1).svg')
-					break;
-				case 1135:
-					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1147:
-					weatherIcon.setAttribute('src', './img/icons/fg_n.svg')
-					break;
-				case 1150:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1153:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1168:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1171:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1180:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1183:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1186:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1189:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1192:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1195:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1198:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1201:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1204:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1207:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+sn_n.svg')
-					break;
-				case 1210:
-					weatherIcon.setAttribute('src', './img/icons/ovc_-sn(1).svg')
-					break;
-				case 1213:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_n.svg')
-					break;
-				case 1216:
-					weatherIcon.setAttribute('src', './img/icons/ovc_sn(1).svg')
-					break;
-				case 1219:
-					weatherIcon.setAttribute('src', './img/icons/bkn_sn_n.svg')
-					break;
-				case 1222:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1225:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1237:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1240:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_n.svg')
-					break;
-				case 1243:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_n.svg')
-					break;
-				case 1246:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_n.svg')
-					break;
-				case 1249:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1252:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1255:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn(1).svg')
-					break;
-				case 1258:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn(1).svg')
-					break;
-				case 1261:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1264:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha(1).svg')
-					break;
-				case 1273:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts(1).svg')
-					break;
-				case 1276:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ra(1).svg')
-					break;
-				case 1279:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
-					break;
-				case 1282:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha(1).svg')
-					break;
-				default:
-					weatherIcon.setAttribute('src', './img/icons/skc_n.svg')
-					break;
-			}
-		} else {
-			switch (code) {
-				case 1000:
-					weatherIcon.setAttribute('src', './img/icons/skc_d.svg')
-					break;
-				case 1003:
-					weatherIcon.setAttribute('src', './img/icons/bkn_d.svg')
-					break;
-				case 1006:
-					weatherIcon.setAttribute('src', './img/icons/ovc.svg')
-					break;
-				case 1009:
-					weatherIcon.setAttribute('src', './img/icons/ovc.svg')
-					break;
-				case 1030:
-					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1063:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1066:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1069:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1072:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1087:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts.svg')
-					break;
-				case 1114:
-					weatherIcon.setAttribute('src', './img/icons/-bl.svg')
-					break;
-				case 1117:
-					weatherIcon.setAttribute('src', './img/icons/bl.svg')
-					break;
-				case 1135:
-					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1147:
-					weatherIcon.setAttribute('src', './img/icons/fg_d.svg')
-					break;
-				case 1150:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1153:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1168:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1171:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1180:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1183:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1186:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1189:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1192:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1195:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1198:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1201:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1204:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1207:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+sn_d.svg')
-					break;
-				case 1210:
-					weatherIcon.setAttribute('src', './img/icons/ovc_-sn.svg')
-					break;
-				case 1213:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-sn_d.svg')
-					break;
-				case 1216:
-					weatherIcon.setAttribute('src', './img/icons/ovc_sn.svg')
-					break;
-				case 1219:
-					weatherIcon.setAttribute('src', './img/icons/bkn_sn_d.svg')
-					break;
-				case 1222:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1225:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1237:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1240:
-					weatherIcon.setAttribute('src', './img/icons/bkn_ra_d.svg')
-					break;
-				case 1243:
-					weatherIcon.setAttribute('src', './img/icons/bkn_+ra_d.svg')
-					break;
-				case 1246:
-					weatherIcon.setAttribute('src', './img/icons/bkn_-ra_d.svg')
-					break;
-				case 1249:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1252:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1255:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ra_sn.svg')
-					break;
-				case 1258:
-					weatherIcon.setAttribute('src', './img/icons/ovc_+sn.svg')
-					break;
-				case 1261:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1264:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ha.svg')
-					break;
-				case 1273:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts.svg')
-					break;
-				case 1276:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ra.svg')
-					break;
-				case 1279:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha.svg')
-					break;
-				case 1282:
-					weatherIcon.setAttribute('src', './img/icons/ovc_ts_ha.svg')
-					break;
-				default:
-					weatherIcon.setAttribute('src', './img/icons/skc_d.svg')
-					break;
-			}
-		}
+
+		forecastList.scrollLeft = scrollOffset;
+		displayForecast(lat, lon);
+	} catch (error) {
+		console.error('Ошибка при получении прогноза на сегодня:', error);
 	}
 }
-function displayWeather(lat, lon) {
-	fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru`)
-		.then(response => response.json())
-		.then(json => {
-			console.log(json);
-			cityName.textContent = json.location.name
-			dateHour.textContent = dateConvert(json.location.localtime);
-			temperature.textContent = Math.round(json.current.temp_c)
-			celsiusLink.addEventListener('click', function (event) {
-				event.preventDefault();
-				temperature.textContent = Math.round(json.current.temp_c)
-				celsiusLink.classList.add('active');
-				fahrenheitLink.classList.remove('active');
-			});
-			fahrenheitLink.addEventListener('click', function (event) {
-				event.preventDefault();
-				temperature.textContent = Math.round(json.current.temp_f);
-				fahrenheitLink.classList.add('active');
-				celsiusLink.classList.remove('active');
-			});
-			weatherDescription.textContent = json.current.condition.text;
-			feelsLike.textContent = Math.round(json.current.feelslike_c);
-			humidityLevel.textContent = json.current.humidity;
-			windSpeed.textContent = Math.round(json.current.wind_kph);
+async function weekForecast(lat, lon, numDays) {
+	try {
+		const response = await fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=${numDays}`);
+		const json = await response.json();
+		const daysWeek = [
+			'Воскресенье',
+			'Понедельник',
+			'Вторник',
+			'Среда',
+			'Четверг',
+			'Пятница',
+			'Суббота'
+		];
+		let forecastDays = json.forecast.forecastday;
+		for (let j = 0; j < forecastDays.length; j++) {
+			let itemForecast = document.createElement('li');
+			let titleForecast = document.createElement('h2');
+			let iconForecast = document.createElement('img');
+			let tempForecast = document.createElement('div');
+			let descriptionForecast = document.createElement('div');
+			let minTempForecast = document.createElement('span');
+			let maxTempForecast = document.createElement('span');
 
-			nightMode(json.location.localtime);
-			todayForecast(lat, lon, json.location.localtime);
-			mainIcon(json.current.condition.code, null);
-			windDirectionFunction(json.current.wind_dir)
-		})
+			itemForecast.classList.add('item-forecast');
+			titleForecast.classList.add('title-forecast');
+			iconForecast.classList.add('icon-forecast');
+			tempForecast.classList.add('temp-forecast');
+			descriptionForecast.classList.add('description-forecast');
+			minTempForecast.classList.add('min-temp');
+			maxTempForecast.classList.add('max-temp');
+
+			elements.listForecast.append(itemForecast);
+			itemForecast.append(titleForecast);
+			itemForecast.append(iconForecast);
+			itemForecast.append(tempForecast);
+			itemForecast.append(descriptionForecast);
+
+			let currentDate = new Date(forecastDays[j].date);
+			titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}.${currentDate.getFullYear()}`;
+			mainIcon(forecastDays[j].day.condition.code, iconForecast);
+			tempForecast.textContent = `от ${Math.round(forecastDays[j].day.mintemp_c)} до ${Math.round(forecastDays[j].day.maxtemp_c)}°C`;
+			descriptionForecast.textContent = forecastDays[j].day.condition.text;
+		}
+	} catch (error) {
+		console.error('Ошибка при получении прогноза на неделю:', error);
+	}
 }
-
-locationButton.addEventListener('click', function () {
-	navigator.geolocation.getCurrentPosition(getPosition);
-});
-
-function getPosition(position) {
-	let lat = position.coords.latitude;
-	let lon = position.coords.longitude;
-	listForecast.innerHTML = '';
-	displayWeather(lat, lon)
-	today.classList.add('active')
-	week.classList.remove('active')
-	fourteenDays.classList.remove('active')
-}
-
-
-function todayForecast(lat, lon, time) {
-	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=1`)
-		.then(response => response.json())
-		.then(json => {
-
-			let hours = json.forecast.forecastday[0].hour
-			const currentTime = new Date(time);
-			const currentHour = currentTime.getHours();
-
-			const forecastList = document.querySelector('.footer__list-forecast');
-
-			let scrollOffset = 0;
-
-			for (let i = 0; i < hours.length; i++) {
-				let itemForecast = document.createElement('li')
-				let titleForecast = document.createElement('h2')
-				let iconForecast = document.createElement('img')
-				let tempForecast = document.createElement('div')
-				let descriptionForecast = document.createElement('div')
-				let minTempForecast = document.createElement('span')
-				let maxTempForecast = document.createElement('span')
-
-				itemForecast.classList.add('item-forecast')
-				titleForecast.classList.add('title-forecast')
-				iconForecast.classList.add('icon-forecast')
-				tempForecast.classList.add('temp-forecast')
-				descriptionForecast.classList.add('description-forecast')
-				minTempForecast.classList.add('min-temp')
-				maxTempForecast.classList.add('max-temp')
-
-				forecastList.append(itemForecast)
-				itemForecast.append(titleForecast)
-				itemForecast.append(iconForecast)
-				itemForecast.append(tempForecast)
-				itemForecast.append(descriptionForecast)
-
-				let currentDate = new Date(hours[i].time)
-				titleForecast.textContent = `${currentDate.getHours().toString().length > 1 ? currentDate.getHours() : '0' + currentDate.getHours()} : 00`
-				mainIcon(hours[i].condition.code, iconForecast)
-				tempForecast.textContent = `${Math.round(hours[i].temp_c)} °C`
-				descriptionForecast.textContent = hours[i].condition.text
-
-				if (currentHour === currentDate.getHours()) {
-					scrollOffset = i * (forecastList.firstElementChild.offsetWidth + parseInt(getComputedStyle(forecastList.firstElementChild).marginRight));
-				}
-			}
-			forecastList.scrollLeft = scrollOffset;
-			displayForecast(lat, lon)
-		})
-}
-function weekForecast(lat, lon, days) {
-	fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=${days}`)
-		.then(response => response.json())
-		.then(json => {
-			console.log(json);
-			const daysWeek = [
-				'Воскресенье',
-				'Понедельник',
-				'Вторник',
-				'Среда',
-				'Четверг',
-				'Пятница',
-				'Суббота'
-			];
-			let days = json.forecast.forecastday
-			for (let j = 0; j < days.length; j++) {
-				let itemForecast = document.createElement('li')
-				let titleForecast = document.createElement('h2')
-				let iconForecast = document.createElement('img')
-				let tempForecast = document.createElement('div')
-				let descriptionForecast = document.createElement('div')
-				let minTempForecast = document.createElement('span')
-				let maxTempForecast = document.createElement('span')
-
-				itemForecast.classList.add('item-forecast')
-				titleForecast.classList.add('title-forecast')
-				iconForecast.classList.add('icon-forecast')
-				tempForecast.classList.add('temp-forecast')
-				descriptionForecast.classList.add('description-forecast')
-				minTempForecast.classList.add('min-temp')
-				maxTempForecast.classList.add('max-temp')
-
-				listForecast.append(itemForecast)
-				itemForecast.append(titleForecast)
-				itemForecast.append(iconForecast)
-				itemForecast.append(tempForecast)
-				itemForecast.append(descriptionForecast)
-
-				let currentDate = new Date(days[j].date)
-				titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}.${currentDate.getFullYear()}`
-				mainIcon(days[j].day.condition.code, iconForecast)
-				tempForecast.textContent = `от ${Math.round(days[j].day.mintemp_c)} до ${Math.round(days[j].day.maxtemp_c)}°C`
-				descriptionForecast.textContent = days[j].day.condition.text
-			}
-		})
-}
-function displayForecast(lat, lon) {
+async function displayForecast(lat, lon) {
 	let today = document.getElementById('today')
 	let week = document.getElementById('week')
 	let fourteenDays = document.getElementById('fourteenDays')
@@ -917,18 +288,19 @@ function displayForecast(lat, lon) {
 	today.addEventListener('click', function (event) {
 		if (!today.classList.contains('active')) {
 			event.preventDefault();
-			listForecast.innerHTML = '';
+			elements.listForecast.innerHTML = '';
 			today.classList.add('active')
 			week.classList.remove('active')
 			fourteenDays.classList.remove('active')
 			todayForecast(lat, lon);
+
 		}
 	});
 
 	week.addEventListener('click', function (event) {
 		if (!week.classList.contains('active')) {
 			event.preventDefault();
-			listForecast.innerHTML = '';
+			elements.listForecast.innerHTML = '';
 			week.classList.add('active')
 			today.classList.remove('active')
 			fourteenDays.classList.remove('active')
@@ -939,7 +311,7 @@ function displayForecast(lat, lon) {
 	fourteenDays.addEventListener('click', function (event) {
 		if (!fourteenDays.classList.contains('active')) {
 			event.preventDefault();
-			listForecast.innerHTML = '';
+			elements.listForecast.innerHTML = '';
 			fourteenDays.classList.add('active')
 			today.classList.remove('active')
 			week.classList.remove('active')
@@ -947,5 +319,78 @@ function displayForecast(lat, lon) {
 		}
 	});
 }
-geolocation();
-displayWeather(56.87, 60.52);
+function updateWindDirection(wind) {
+	const directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+	const degreeStep = 22.5;
+	const index = Math.round(directions.indexOf(wind) * degreeStep);
+	elements.windDirection.style.transform = `rotate(${index}deg)`;
+}
+
+async function geolocation() {
+	elements.buttonSearchSity.addEventListener('click', async function (e) {
+		e.preventDefault();
+		let sityName = elements.inputSity.value;
+		try {
+			const response = await fetch(`https://catalog.api.2gis.com/3.0/items/geocode?q=${sityName}&fields=items.point&key=${apiKeyGeolocation}`);
+			const json = await response.json();
+			const coords = {
+				lat: json.result.items[0].point.lat,
+				lon: json.result.items[0].point.lon,
+			};
+			elements.listForecast.innerHTML = '';
+			displayWeather(coords.lat, coords.lon);
+			today.classList.add('active');
+			week.classList.remove('active');
+			fourteenDays.classList.remove('active');
+		} catch (error) {
+			console.error('Ошибка при получении геолокации:', error);
+		}
+	})
+}
+
+
+
+
+function handleLocationButtonClick(e) {
+	e.preventDefault();
+	try {
+		navigator.geolocation.getCurrentPosition(getPosition);
+	} catch (error) {
+		console.error('Ошибка при получении геолокации:', error);
+	}
+}
+
+
+function getPosition(position) {
+	try {
+		let lat = position.coords.latitude;
+		let lon = position.coords.longitude;
+		elements.listForecast.innerHTML = '';
+		displayWeather(lat, lon);
+		today.classList.add('active');
+		week.classList.remove('active');
+		fourteenDays.classList.remove('active');
+	} catch (error) {
+		console.error('Ошибка при получении позиции:', error);
+	}
+}
+
+
+const pixelsPerWheelRotation = 190;
+
+elements.listForecast.addEventListener('wheel', function (event) {
+	if (event.deltaY !== 0) {
+		const scrollLeft = elements.listForecast.scrollLeft + (event.deltaY > 0 ? pixelsPerWheelRotation : -pixelsPerWheelRotation);
+		elements.listForecast.scrollTo({
+			left: scrollLeft,
+		});
+		event.preventDefault();
+	}
+});
+function init() {
+	elements.locationButton.addEventListener('click', handleLocationButtonClick);
+	geolocation();
+	displayWeather(56.87, 60.52);
+}
+
+document.addEventListener('DOMContentLoaded', init);
