@@ -21,7 +21,8 @@ const elements = {
 	humidityLevel: document.getElementById('humidity-level'),
 	windSpeed: document.getElementById('wind-speed'),
 	listForecast: document.querySelector('.footer__list-forecast'),
-	windDirection: document.querySelector('.wind-direction')
+	windDirection: document.querySelector('.wind-direction'),
+	footerList: document.querySelector('.footer__list-forecast')
 };
 
 
@@ -33,7 +34,8 @@ function addNightModeClasses(isNight) {
 		elements.inputSity,
 		elements.buttonSearchSity,
 		elements.footer,
-		elements.forecast
+		elements.forecast,
+		elements.footerList
 	];
 	const iconSrc = isNight ? './img/location-dark.svg' : './img/location-light.svg';
 	elements.locationIcon.setAttribute('src', iconSrc);
