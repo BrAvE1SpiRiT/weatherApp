@@ -1,5 +1,5 @@
 const apiKeyWeather = '8b106b724a27471cb6b154620240704'
-const apiKeyGeolocation = '1f1b9591-3ccb-4212-a4ec-18f11d78b7af'
+const apiKeyGeolocation = 'c09bb226-afd2-4f70-99ea-bcce78fe7122'
 
 const elements = {
 	body: document.querySelector('.body'),
@@ -333,11 +333,11 @@ async function geolocation() {
 		e.preventDefault();
 		let sityName = elements.inputSity.value;
 		try {
-			const response = await fetch(`https://catalog.api.2gis.com/3.0/items/geocode?q=${sityName}&fields=items.point&key=${apiKeyGeolocation}`);
+			const response = await fetch(`https://geocode-maps.yandex.ru/1.x?apikey=${apiKeyGeolocation}&geocode=${sityName}&lang=ru_RU&format=json`);
 			const json = await response.json();
 			const coords = {
-				lat: json.result.items[0].point.lat,
-				lon: json.result.items[0].point.lon,
+				lon: json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[0],
+				lat: json.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(' ')[1],
 			};
 			elements.listForecast.innerHTML = '';
 			displayWeather(coords.lat, coords.lon);
