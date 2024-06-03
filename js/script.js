@@ -1,6 +1,6 @@
 const apiKeyWeather = '8b106b724a27471cb6b154620240704'
 const apiKeyGeolocation = 'c09bb226-afd2-4f70-99ea-bcce78fe7122'
-
+let isNightMode = false;
 const elements = {
 	body: document.querySelector('.body'),
 	container: document.querySelector('.container'),
@@ -26,7 +26,7 @@ const elements = {
 };
 
 
-function addNightModeClasses(isNight) {
+function addNightModeClasses(isNightMode) {
 	const elementsToModify = [
 		elements.body,
 		elements.container,
@@ -37,12 +37,12 @@ function addNightModeClasses(isNight) {
 		elements.forecast,
 		elements.footerList
 	];
-	const iconSrc = isNight ? './img/location-dark.svg' : './img/location-light.svg';
+	const iconSrc = isNightMode ? './img/location-dark.svg' : './img/location-light.svg';
 	elements.locationIcon.setAttribute('src', iconSrc);
 
 
 	elementsToModify.forEach(element => {
-		element.classList.toggle('nightmode', isNight);
+		element.classList.toggle('nightmode', isNightMode);
 	});
 }
 
@@ -96,9 +96,9 @@ let weatherIcons = {
 	1279: './img/icons/ovc_ts_ha',
 	1282: './img/icons/ovc_ts_ha'
 };
-function setIconSrc(iconForecast, code, isNight) {
+function setIconSrc(iconForecast, code) {
 	// Режим времени суток: "_d" - день, "_n" - ночь
-	const timeMode = isNight ? '_n' : '_d';
+	const timeMode = isNightMode ? '_n' : '_d';
 	const imagePath = `${weatherIcons[code]}${timeMode}.svg`;
 	iconForecast.setAttribute('src', imagePath);
 	iconForecast.setAttribute('loading', 'lazy');
@@ -144,9 +144,9 @@ function dateConvert(date) {
 function toggleNightMode(date) {
 	const currentDate = new Date(date)
 	const hour = currentDate.getHours();
-	const isNight = hour >= 19 || hour < 6;
-	addNightModeClasses(isNight);
-	return isNight;
+	isNightMode = hour >= 19 || hour < 6;
+	addNightModeClasses(isNightMode);
+	return isNightMode;
 }
 
 async function displayWeather(lat, lon) {
@@ -171,7 +171,7 @@ async function displayWeather(lat, lon) {
 		elements.weatherDescription.textContent = json.current.condition.text;
 		elements.feelsLike.textContent = Math.round(json.current.feelslike_c);
 		elements.humidityLevel.textContent = json.current.humidity;
-		elements.windSpeed.textContent = Math.round(json.current.wind_kph);
+		elements.windSpeed.textContent = Math.round(json.current.wind_mph);
 
 		toggleNightMode(json.location.localtime);
 		todayForecast(lat, lon, json.location.localtime);
@@ -229,98 +229,11 @@ async function todayForecast(lat, lon, time) {
 		}
 
 		forecastList.scrollLeft = scrollOffset;
-		displayForecast(lat, lon);
 	} catch (error) {
 		console.error('Ошибка при получении прогноза на сегодня:', error);
 	}
 }
-async function weekForecast(lat, lon, numDays) {
-	try {
-		const response = await fetch(`https://api.weatherapi.com/v1//forecast.json?key=${apiKeyWeather}&q=${lat},${lon}&lang=ru&days=${numDays}`);
-		const json = await response.json();
-		const daysWeek = [
-			'Воскресенье',
-			'Понедельник',
-			'Вторник',
-			'Среда',
-			'Четверг',
-			'Пятница',
-			'Суббота'
-		];
-		let forecastDays = json.forecast.forecastday;
-		for (let j = 0; j < forecastDays.length; j++) {
-			let itemForecast = document.createElement('li');
-			let titleForecast = document.createElement('h2');
-			let iconForecast = document.createElement('img');
-			let tempForecast = document.createElement('div');
-			let descriptionForecast = document.createElement('div');
-			let minTempForecast = document.createElement('span');
-			let maxTempForecast = document.createElement('span');
 
-			itemForecast.classList.add('item-forecast');
-			titleForecast.classList.add('title-forecast');
-			iconForecast.classList.add('icon-forecast');
-			tempForecast.classList.add('temp-forecast');
-			descriptionForecast.classList.add('description-forecast');
-			minTempForecast.classList.add('min-temp');
-			maxTempForecast.classList.add('max-temp');
-
-			elements.listForecast.append(itemForecast);
-			itemForecast.append(titleForecast);
-			itemForecast.append(iconForecast);
-			itemForecast.append(tempForecast);
-			itemForecast.append(descriptionForecast);
-
-			let currentDate = new Date(forecastDays[j].date);
-			titleForecast.innerHTML = `${daysWeek[currentDate.getDay()]}<br>${currentDate.getDate()}.${currentDate.getMonth().toString().length = 1 ? '0' + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}.${currentDate.getFullYear()}`;
-			mainIcon(forecastDays[j].day.condition.code, iconForecast);
-			tempForecast.textContent = `от ${Math.round(forecastDays[j].day.mintemp_c)} до ${Math.round(forecastDays[j].day.maxtemp_c)}°C`;
-			descriptionForecast.textContent = forecastDays[j].day.condition.text;
-		}
-	} catch (error) {
-		console.error('Ошибка при получении прогноза на неделю:', error);
-	}
-}
-async function displayForecast(lat, lon) {
-	let today = document.getElementById('today')
-	let week = document.getElementById('week')
-	let fourteenDays = document.getElementById('fourteenDays')
-
-
-	today.addEventListener('click', function (event) {
-		if (!today.classList.contains('active')) {
-			event.preventDefault();
-			elements.listForecast.innerHTML = '';
-			today.classList.add('active')
-			week.classList.remove('active')
-			fourteenDays.classList.remove('active')
-			todayForecast(lat, lon);
-
-		}
-	});
-
-	week.addEventListener('click', function (event) {
-		if (!week.classList.contains('active')) {
-			event.preventDefault();
-			elements.listForecast.innerHTML = '';
-			week.classList.add('active')
-			today.classList.remove('active')
-			fourteenDays.classList.remove('active')
-			weekForecast(lat, lon, 7);
-		}
-	});
-
-	fourteenDays.addEventListener('click', function (event) {
-		if (!fourteenDays.classList.contains('active')) {
-			event.preventDefault();
-			elements.listForecast.innerHTML = '';
-			fourteenDays.classList.add('active')
-			today.classList.remove('active')
-			week.classList.remove('active')
-			weekForecast(lat, lon, 14);
-		}
-	});
-}
 function updateWindDirection(wind) {
 	const directions = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
 	const degreeStep = 22.5;
@@ -350,9 +263,6 @@ async function geolocation() {
 	})
 }
 
-
-
-
 function handleLocationButtonClick(e) {
 	e.preventDefault();
 	try {
@@ -361,8 +271,6 @@ function handleLocationButtonClick(e) {
 		console.error('Ошибка при получении геолокации:', error);
 	}
 }
-
-
 function getPosition(position) {
 	try {
 		let lat = position.coords.latitude;
@@ -376,10 +284,7 @@ function getPosition(position) {
 		console.error('Ошибка при получении позиции:', error);
 	}
 }
-
-
 const pixelsPerWheelRotation = 190;
-
 elements.listForecast.addEventListener('wheel', function (event) {
 	if (event.deltaY !== 0) {
 		const scrollLeft = elements.listForecast.scrollLeft + (event.deltaY > 0 ? pixelsPerWheelRotation : -pixelsPerWheelRotation);
@@ -393,6 +298,14 @@ function init() {
 	elements.locationButton.addEventListener('click', handleLocationButtonClick);
 	geolocation();
 	displayWeather(56.87, 60.52);
+	document.body.onload = function () {
+		setTimeout(() => {
+			const preloader = document.getElementById('preloader')
+			if (!preloader.classList.contains('done')) {
+				preloader.classList.add('done')
+			}
+		}, 200);
+	}
 }
 
 document.addEventListener('DOMContentLoaded', init);
